@@ -1,2 +1,2 @@
-# cfg
-My configuration files
+# README
+Various configuration files
