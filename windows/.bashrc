@@ -2,7 +2,6 @@
 alias gs="git status"
 alias ga="git add"
 alias gaa="git add -A"
-alias gs="git status"
 alias gd="git diff"
 alias gc="git commit"
 alias ls="ls --color=auto"
