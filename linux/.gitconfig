@@ -1,0 +1,110 @@
+[user]
+    name = Dustin Graves
+    email = dustin@bestpractical.com
+
+[push]
+    default = simple
+
+[alias]
+    co = checkout
+    br = branch
+    df = diff
+    filelog = diff-tree --no-commit-id --name-only -r
+    dns = diff --name-status
+    dno = diff --name-only
+    unstage = reset HEAD --
+    ls = log --pretty=format:"%C(bold)%C(yellow)%h%C(reset)%C(red)%d\\ %C(reset)%s%C(bold)%C(blue)\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(bold)%C(yellow)%h%C(reset)%C(red)%d\\ %C(reset)%s%C(bold)%C(blue)\\ [%cn]" --decorate --numstat
+    ld = log --pretty=format:"%C(bold)%C(yellow)%h\\ %C(reset)%C(green)%ad%C(red)%d\\ %C(reset)%s%C(bold)%C(blue)\\ [%cn]" --decorate --date=relative
+    lds = log --pretty=format:"%C(bold)%C(yellow)%h\\ %C(reset)%C(green)%ad%C(red)%d\\ %C(reset)%s%C(bold)%C(blue)\\ [%cn]" --decorate --date=short
+    la = "!git config -l | grep alias | cut -c 7-" # list all aliases
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    up = fetch --all --prune
+
+# For adding changes onto a commit just made:
+    amend = commit --amend -C HEAD
+
+# For updating the wording on a just-made commit:
+    reword = commit --amend
+
+# (p)ublish the current (b)ranch
+    pb    = push -u origin HEAD
+
+# To search the current tree using regular expressions:
+    ack   = grep --perl-regexp --break --heading --line-number
+
+# Show a (g)raphic history, defaulting to from the current commit:
+    g     = log --abbrev-commit --graph --decorate --oneline
+
+# A (s)hort (g)raph, which only shows the most recent 10 lines:
+    sg    = !git --no-pager log --abbrev-commit --graph --decorate --oneline -n 10
+
+# Also a short version, which shows all of the commits unique to this
+# branch -- a (b)ranch (g)raph.  Requires that `git-which-branch` (from the `git-tools`
+# repository) be in your path:
+    bg    = !git --no-pager log --abbrev-commit --graph --decorate --oneline HEAD ^`git which-branch -q`
+
+# As the previous command, but with gitk:
+    bgk   = !gitk HEAD ^`git which-branch -q`
+
+# Use https://github.com/trast/tbdiff to visualize how the upstream
+# re-roll of the current branch has been (upd)ated from the local one.
+    upd   = !git tbdiff --dual-color `git which-branch -q` HEAD @{u}
+[credential]
+    helper = cache
+[pull]
+# When "git pull" goes to include new commits from upstream, rebase the
+# current commits (preserving merges, if there are any!) instead of
+# doing a merge.  This keeps commit history cleaner.
+    rebase = preserve
+
+[merge]
+# When asking for "git merge" (to merge a feature branch), create a
+# merge commit, even if a fast-forward could be used.  This shows, in
+# the history, that the commits were all on a branch, and what that
+# branch name was.  This helps group commits logically.
+    ff = off
+
+[sync]
+# The following options configure the `git sync` tool.  You will need to
+# replace the "..." with the path you would like code to be syncronized
+# into.
+    log
+    quiet
+    stash
+[sync "bps"]
+    host = git.bestpractical.com
+    path = /git
+    path = /git-private
+    into = /home/dustin/bps
+[sync "customers"]
+    host = git.bestpractical.com
+    path = /git-customers
+    into = /home/dustin/bps-customers
+#[sync "other"]
+#    github = dgx
+#    github = bestpractical
+#    into = /home/dustin/github
+
+[rerere]
+# git-rerere is used, behind the scenes, by `git merge`, to note how
+# conflicts were resolved; if the same conflict arises again (if you
+# have to re-do the merge, for instance), it supplies your previous
+# resolution.
+    enabled
+[pager]
+# Configure git to use a post-processor to highlight where, within lines
+# that are mostly unchanged, the individual changes were.  See
+# https://github.com/git/git/tree/master/contrib/diff-highlight
+    #log  = diff-highlight | less
+    #show = diff-highlight | less
+    #diff = diff-highlight | less
+[column]
+# Use multi-column formats if the terminal is wide enough
+    ui = auto
+[github]
+    user = dgx
+    token = 79513c0a64ab78eddbb1ab72d79b7828df3a50d7
